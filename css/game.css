@@ -1,0 +1,86 @@
+body{
+    width: 800px;
+    height: 600px;
+    margin: 0 auto;
+    background-color:rgb(163, 163, 163);
+    text-align: center;
+font-family: tbcgothic-std, sans-serif;
+font-weight: 800;
+font-style: normal;
+}
+
+/* タイトルの設定 */
+h1{
+    font-size: 50px;
+    background-color:rgb(255, 255, 255);
+    margin-bottom: 10px;
+}
+
+p{
+    font-size: 1.5em;
+    margin: 0px;
+}
+
+.top-wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* 得点・ */
+ul{
+    list-style: none;
+    display: flex;
+}
+
+li{
+    font-size: 25px;
+}
+
+
+/* ボタンレイアウト・装飾 */
+.button{
+    font-family:tbcgothic-std, sans-serif;
+    margin-top: 5px;
+    padding-bottom: 10px ;
+    text-align: center;
+    text-decoration: none;
+    font-size: 20px;
+  color: white;
+  background: black;
+  border-bottom: solid 4px black;
+  border-radius: 15px;
+  transition: .4s;
+}
+
+.button:hover{
+    background: #ffc25c;
+    color: #FFF;
+}
+
+/* ゲーム画面の設定 */
+.field {
+    position: relative;
+    top: 10px;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: 800px;
+    height: 550px;
+    border: solid 4px;
+    background-image: url(../img/background.png);
+}
+
+.target {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 12.5%;
+    height: 18%;
+    cursor: pointer;
+    background-image: url(../img/ka1.png);
+}
+
+.target:active{
+    background-image: url(../img/ka2.png);
+}

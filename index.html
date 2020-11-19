@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/game.css">
+
+  <!-- フォントの設定 -->
+  <script>
+    (function (d) {
+      var config = {
+        kitId: 'cia7lks',
+        scriptTimeout: 3000,
+        async: true
+      },
+        h = d.documentElement, t = setTimeout(function () { h.className = h.className.replace(/\bwf-loading\b/g, "") + " wf-inactive"; }, config.scriptTimeout), tk = d.createElement("script"), f = false, s = d.getElementsByTagName("script")[0], a; h.className += " wf-loading"; tk.src = 'https://use.typekit.net/' + config.kitId + '.js'; tk.async = true; tk.onload = tk.onreadystatechange = function () { a = this.readyState; if (f || a && a != "complete" && a != "loaded") return; f = true; clearTimeout(t); try { Typekit.load(config) } catch (e) { } }; s.parentNode.insertBefore(tk, s)
+    })(document);
+  </script>
+
+  <title>コロナ蚊を倒すゲーム</title>
+
+</head>
+
+<body>
+  <header>
+    <h1>コロナ蚊を倒すゲーム</h1>
+    <p>コロナ蚊をクリックして倒すと100ポイント。制限時間は15秒間。</p>
+    <p>500ポイント以下だと次回難易度が上がります</p>
+  </header>
+
+  <main>
+    <div class="top-wrapper">
+      <div class="control">
+        <input type="button" class="button" id="start_button" value="スタート">
+        <input type="button" class="button" id="stop_button" value="休憩">
+        <input type="button" class="button save" id="save" value="スコア保存">
+        <input type="button" class="button delete" id="delete" value="スコア削除">
+      </div>
+      <div class="scorespace">
+        <ul>
+          <li>制限時間:</li>
+          <li class="limit"></li>
+        </ul>
+        <ul>
+          <li>得点:</li>
+          <li class="score" id="score"></li>
+        </ul>
+      </div>
+    </div>
+    <div class="field">
+      <div class="target"></div>
+
+    </div>
+
+  </main>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script>
+    $(function () {
+      var score = 0;  //スコアの点数格納用
+      var count = 15;  //残り秒数
+
+      function move() {
+        //通常モード：0～50の乱数で蚊を動かす
+        $(".target").animate({
+          'top': Math.round(Math.random() * 50) + "%",
+          'left': Math.round(Math.random() * 50) + "%"
+        }, 200);
+      }
+
+      // スタートボタンを押すとカウントダウン
+      $('#start_button').click(function () {
+        cnt = 15; //10秒前からカウントスタート
+        $('.limit').text(cnt);
+        cnDown = setInterval(function () { //1秒おきにカウントマイナス
+          cnt--;
+          if (cnt <= 0) {   //0になったら停止する
+            clearInterval(cnDown);   //カウントダウン停止
+            clearInterval(TIMER);    //タイマー停止
+          }
+          $('.limit').text(cnt);
+        }, 1000);
+        TIMER = setInterval(function () { move() }, 500);
+      });
+
+      // 休憩ボタンを押すと時間と動きが止まる
+      $('#stop_button').click(function () {
+        clearInterval(TIMER);
+        clearInterval(cnDown);
+      });
+
+      // 蚊を押すと100点入る
+      $('.target').click(function () {
+        score += 100; //100点を加算
+        console.log(score);
+        $('.score').html(score); //画面右上の得点表に加算得点を反映
+      });
+
+      // 得点を保存
+      $('#save').on('click', function () {
+        const figure = $('#score').val();
+        localStorage.setItem('total', figure);
+      });
+
+      // 得点を削除する
+      $('#delite').on('click', function () {
+        localStorage.removeItem('total');
+      })
+
+      //パンデミックモード：0～100の乱数で蚊を動かす
+
+
+    });
+
+
+  </script>
+
+</body>
+
+</html>
