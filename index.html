@@ -93,20 +93,20 @@
       // 蚊を押すと100点入る
       $('.target').click(function () {
         score += 100; //100点を加算
-        console.log(score);
+        // console.log(score);
         $('.score').html(score); //画面右上の得点表に加算得点を反映
       });
 
       // 得点を保存
       $('#save').on('click', function () {
-        const figure = $('#score').val();
+        const figure = $('.score').val();
         localStorage.setItem('total', figure);
       });
 
       // 得点を削除する
-      $('#delite').on('click', function () {
+      $('#delete').on('click', function () {
         localStorage.removeItem('total');
-      })
+      });
 
       //パンデミックモード：0～100の乱数で蚊を動かす
 
